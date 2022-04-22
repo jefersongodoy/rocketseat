@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body, input, button, textarea, select {
+body, input, textarea, select {
   font-family: 'Poppins', sans-serif;  
 }
 
@@ -57,7 +57,7 @@ form {
 
   background: #FAFAFC;
 
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   min-height: 300px;
 
   display: flex;
@@ -92,7 +92,8 @@ fieldset legend {
   flex-direction: column;
 }
 
-.input-wrapper label {
+.input-wrapper label,
+.checkbox-wrapper label {
   font-size: 14px;
   line-height: 24px;
   color: #4E4958;
@@ -141,4 +142,81 @@ fieldset legend {
 
 .col-3 > div:nth-child(1) {
   width: 100%;
+}
+
+.checkbox-wrapper {
+  position: relative;
+}
+
+.checkbox-wrapper label{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  margin: 0;
+}
+
+.checkbox-wrapper input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+
+  opacity: 0;
+}
+
+.checkbox-wrapper label::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: block;
+
+  border: 1px solid #E6E6F0;
+  border-radius: 8px;
+}
+
+.checkbox-wrapper input:checked + label::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='26' height='26' viewBox='0 0 26 26' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1' y='1' width='24' height='24' rx='8' fill='%23FAFAFC' stroke='%23E6E6F0'/%3E%3Cpath d='M10 17.17L5.83 13L4.41 14.41L10 20L22 8L20.59 6.59L10 17.17Z' fill='%2342D3FF'/%3E%3C/svg%3E%0A");
+}
+
+.checkbox-wrapper input:focus + label::before {
+  border: 2px solid #000;
+}
+
+footer {
+  background: #F0F0F4;
+
+  height: 136px;
+
+  display: flex;
+  flex-direction: column;
+  
+  padding: 40px 64px;
+  
+  margin-bottom: 100px;
+
+  border-top: 1px solid #E6E6F0;
+  border-radius: 0 0 8px 8px;
+}
+
+footer .button {
+  height: 56px;
+
+  background: #04D361;
+
+  border-radius: 8px;
+
+  font-family: Archivo;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  color: #fff;
+
+  border: 0;
+
+}
+
+footer .button:hover {
+  background: #06b052;
 }
