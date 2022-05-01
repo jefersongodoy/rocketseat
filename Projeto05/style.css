@@ -159,6 +159,7 @@ main {
 
 @media (min-width: 930px) {
   main {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "A B B"
     "C C D";
   }
