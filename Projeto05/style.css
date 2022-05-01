@@ -146,10 +146,12 @@ main {
 }
 
 @media (min-width: 700px) {
+  /*
   .page {
     max-width: 117rem;
     padding: 0 5rem;
   }
+  */
   main {
     grid-template-columns: 1fr 1fr;
   }
