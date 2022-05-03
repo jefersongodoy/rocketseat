@@ -84,6 +84,7 @@ main {
   filter: brightness(0.5);
 
   transition: all 200ms;
+  /*filter: brightness(1.50);*/
 }
 
 .card img:hover {
@@ -91,8 +92,7 @@ main {
 
   box-shadow: 0px 0px 6px var(--fc-primary);
 
-  /*opacity: 0.4;*/
-  filter: brightness(0.2);
+  opacity: 0.4;
 }
 
 .card h2 {
