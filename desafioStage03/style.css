@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --ff-palaquin: 'Palanquin', sans-serif;
+  --ff-staatliches: 'Staatliches', cursive;
+  --f-color-first: hsl(0, 0%, 100%);
+  --f-color-second: hsl(274, 84%, 12%);
+  --f-color-third: hsl(233, 17%, 35%);
+  font-size: 62.5%;
+
+
+  --bg--first: hsl(233, 100%, 97%);
+  --bg--second:hsl(218, 17%, 62%);
+  --bg--third: hsl(275, 18%, 79%);
+  
+}
+
+body {
+  background: var(--bg--first);
+  font-size: 1.6rem;
+}
+
+.page {
+  width: 38.4rem;
+  margin: 0 auto;
+  border: 1px solid red;
+}
+
+header {
+  text-align: center;
+  background: var(--bg--second);
+  height: 27.9rem;
+}
+
+header img {
+  padding: 3rem 0;
+}
+
+header h1 {
+  text-transform: uppercase;
+  font-family: var(--ff-staatliches);
+  font-size: 4rem;
+  font-weight: 400;
+  color: var(--f-color-first);
+  letter-spacing: 0.05rem;
+  line-height: 3.4rem;
+
+  background: var(--bg--third);
+
+  padding: 0.8rem 0;
+}
+
+main {
+  display: grid;
+  gap: 3.6rem;
+  padding: 0 3.2rem 6rem;
+}
+
+main p {
+  text-align: center;
+  font-family: var(--ff-palaquin);
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--f-color-second);
+  line-height: 1.5rem;
+
+  padding: 1.4rem 0 6.3rem;
+}
+
+.card {
+  position: relative;
+}
+
+.card img {
+  width: 32REM;
+  border-radius: 2rem;
+}
+
+.sm img {
+  height: 25rem;
+  object-fit: cover;
+}
+
+.lg img {
+  height: 45rem;
+}
+
+.card h2 {
+  position: absolute;
+  top: 1.7rem;
+  right: 1.7rem;
+  background: var(--bg--first);
+  border-radius: 2rem;
+  padding: 0 2.3rem;
+  font-size: 2rem;
+  font-family: var(--ff-staatliches);
+  font-weight: 400;
+  color: var(--f-color-third);
+  line-height: 3.4rem;
+  letter-spacing: 0.05rem;
+}
