@@ -291,18 +291,14 @@ main {
     font-weight: normal;
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100vw;
-    height: 100vh;
-    padding: 0;
-  }
-
   main {
     padding: 6.4rem 9rem 5rem;
     align-content: center;
-    margin: 0 auto;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
   }
 }
