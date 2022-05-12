@@ -273,13 +273,13 @@ main {
 @media (min-width: 1200px) {
   .page {
     display: flex;
-    height: 100vh;
+    height: 72rem;
     margin: 0;
   }
 
   .head {
     min-width: 38rem;
-    height: 100vh;
+    height: 100%;
     background: var(--bg--second);
   }
 
