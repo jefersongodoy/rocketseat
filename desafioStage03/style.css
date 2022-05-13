@@ -272,6 +272,7 @@ main {
     font-family: var(--ff-roboto);
     line-height: 2.4rem;
     font-weight: normal;
+    background: var(--bg--second);
   }
 
   .container {
@@ -289,5 +290,11 @@ main {
     align-content: center;
     margin: 0 auto;
     padding: 6.4rem 8.1rem 5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .foot {
+    font-size: 2rem;
   }
 }
