@@ -87,6 +87,9 @@ main {
   object-fit: cover;
   border-radius: 2rem;
 
+  transition-property: all;
+  transition-duration: 400ms;
+
   animation: downtop 500ms 350ms backwards;
 }
 
