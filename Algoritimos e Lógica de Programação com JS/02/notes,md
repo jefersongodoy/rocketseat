@@ -1,0 +1,21 @@
+- Em inglês
+
+- Sem espaços ou acentuações especiasi no nome
+
+- Não pode iniciar com número
+
+- camelCase
+
+[] Tipo de dado: Number
+[] typeof
+[] Operador matemático
+[] Manipulação de dados
+[] type conversion (type casting)
+[] Number() (função construtota para converter um dado em números)
+[] String() (função construtota para converter um dado em string)
+[] Orderm de precedência dos operadores
+[] Group operator
+
+Se os dois números forem do mesmo tipo o sinal + vai realizar a soma;
+
+Se os dois números fores de tipos diferentes o sinal + vai concatenar;
