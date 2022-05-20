@@ -31,6 +31,17 @@ const patients = [
   }
 ]
 
-alert(`Paciente ${patients[0].name} possui o IMC de : 
-${(patients[0].weight / (patients[0].height / 100) ** 2).toFixed(2)}
-`)
+function IMC(weight, height) {
+  return (weight / (height / 100) ** 2).toFixed(2)
+}
+
+const printPatientIMC = patients => {
+  return `Paciente ${patients.name} possui o IMC de : 
+  ${IMC(patients.weight, patients.height)}
+  `
+}
+
+for (let patient of patients) {
+  let IMCmessage = printPatientIMC(patient)
+  alert(IMCmessage)
+}
