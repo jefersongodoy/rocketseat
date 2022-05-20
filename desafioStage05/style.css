@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: var(hsl(0, 0%, 90%));
+  --f-color: var(hsl(240, 6%, 21%));
+  font-size: 62, 5%;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--f-color);
+}
+
+.time {
+  font-size: 12.6rem;
+  font-weight: 500;
+  line-height: 14.8rem;
+}
