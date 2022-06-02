@@ -1,75 +1,69 @@
-//EcmaScript - ES6 Modules
+import Controls from './controls.js'
+import Timer from './timer.js'
+import Sound from './sounds.js'
+import {
+  buttonPlay,
+  buttonPause,
+  buttonStop,
+  buttonSet,
+  buttonSoundOn,
+  buttonSoundOff,
+  minutesDisplay,
+  secondsDisplay
+} from './elements.js'
 
-//default import
-import resetControls from './controls.js'
+const controls = Controls({
+  buttonPause,
+  buttonPlay,
+  buttonStop,
+  buttonSet
+})
 
-// named import
-import { Timer } from './timer.js'
-//Event-driven = evento direcionado
+const sound = Sound()
 
-//progamação imperativa = dando ordens
-
-//callback = chamada com retorno
-
-/*
-REFATORAÇÃO - mudar o código para deixa-lo mais entendível, mais performático SEM ALTERAR suas funcionalidades.
-*/
-
-const buttonPlay = document.querySelector('.play')
-const buttonPause = document.querySelector('.pause')
-const buttonStop = document.querySelector('.stop')
-const buttonSet = document.querySelector('.set')
-const buttonSoundOn = document.querySelector('.sound-on')
-const buttonSoundOff = document.querySelector('.sound-off')
-const minutesDisplay = document.querySelector('.minutes')
-const secondsDisplay = document.querySelector('.seconds')
-let minutes = Number(minutesDisplay.textContent)
-let timerTimeOut
-
-// ijeção de dependências
 const timer = Timer({
   minutesDisplay,
   secondsDisplay,
-  timerTimeOut,
-  resetControls
+  resetControls: controls.reset
 })
 
 buttonPlay.addEventListener('click', function () {
-  buttonPlay.classList.add('hide')
-  buttonPause.classList.remove('hide')
-  buttonSet.classList.add('hide')
-  buttonStop.classList.remove('hide')
+  controls.play()
   timer.countdown()
+  sound.pressButton()
 })
 
 buttonPause.addEventListener('click', function () {
-  buttonPause.classList.add('hide')
-  buttonPlay.classList.remove('hide')
-  clearTimeout(timerTimeOut)
+  controls.pause()
+  timer.hold()
+  sound.pressButton()
 })
 
 buttonStop.addEventListener('click', function () {
-  resetControls()
-  timer.resetTimer()
+  controls.reset()
+  timer.reset()
+  sound.pressButton()
 })
 
 buttonSoundOff.addEventListener('click', function () {
   buttonSoundOn.classList.remove('hide')
   buttonSoundOff.classList.add('hide')
+  sound.bgAudio.pause()
 })
 
 buttonSoundOn.addEventListener('click', function () {
   buttonSoundOn.classList.add('hide')
   buttonSoundOff.classList.remove('hide')
+  sound.bgAudio.play()
 })
 
 buttonSet.addEventListener('click', function () {
-  let newMinutes = prompt('Quantos minutos?')
+  let newMinutes = controls.getMinutes()
 
   if (!newMinutes) {
-    timer.resetTimer()
+    timer.reset()
     return
   }
-  minutes = newMinutes
-  updateTimerDisplay(minutes, 0)
+  timer.updateDisplay(newMinutes, 0)
+  timer.updateMinutes(newMinutes)
 })
