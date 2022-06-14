@@ -73,6 +73,7 @@ function countDown() {
     let seconds = Number(secondsDisplay.textContent)
 
     if (minutes <= 0 && seconds <= 0) {
+      finish()
       timerEnd()
       return
     }
@@ -89,19 +90,24 @@ function countDown() {
 }
 
 buttonPlay.addEventListener('click', function () {
+  press()
   countDown()
 })
 
 buttonStop.addEventListener('click', function () {
+  press()
   clearTimeout(timerOut)
+  updateDisplay(minutes, 0)
 })
 
 buttonSum.addEventListener('click', function () {
+  press()
   ++minutes
   updateDisplay(minutes, 0)
 })
 
 buttonSub.addEventListener('click', function () {
+  press()
   --minutes
   updateDisplay(minutes, 0)
 })
@@ -110,11 +116,21 @@ forestSound = new Audio('./sounds/Floresta.wav')
 coffeeSound = new Audio('./sounds/Cafeteria.wav')
 rainSound = new Audio('./sounds/Chuva.wav')
 fireSound = new Audio('./sounds/Lareira.wav')
+buttonPress = new Audio('./sounds/button-press.wav')
+kichenTimer = new Audio('./sounds/kichen-timer.mp3')
 
 forestSound.loop = true
 coffeeSound.loop = true
 rainSound.loop = true
 fireSound.loop = true
+
+function press() {
+  buttonPress.play()
+}
+
+function finish() {
+  kichenTimer.play()
+}
 
 function forest() {
   forestSound.play()
