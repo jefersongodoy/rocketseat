@@ -5,9 +5,13 @@
 }
 
 :root {
-  --bg-color: var(hsl(0, 0%, 90%));
-  --f-color: var(hsl(240, 6%, 21%));
-  font-size: 62, 5%;
+  --bg-color: hsl(0, 0%, 100%);
+  --bg-active: hsl(194, 97%, 31%);
+  --bg-inactive: hsl(240, 9%, 89%);
+  --f-color: hsl(240, 6%, 21%);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 62.5%;
 }
 
 body {
@@ -15,8 +19,69 @@ body {
   color: var(--f-color);
 }
 
-.time {
+.page {
+  max-width: 82.1rem;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.controls {
+  width: 32.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timer {
+  height: 14.8rem;
   font-size: 12.6rem;
-  font-weight: 500;
-  line-height: 14.8rem;
+  display: flex;
+}
+
+.buttons {
+  height: 4.8rem;
+  display: flex;
+  gap: 4rem;
+}
+
+.buttons button {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+
+.cards {
+  width: 30.8rem;
+  height: 33.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.2rem;
+}
+
+.cards button {
+  width: 13.8rem;
+  height: 15.2rem;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+
+.active svg path:nth-child(1) {
+  fill: var(--bg-active);
+}
+
+.active svg path:nth-child(2) {
+  fill: var(--bg-color);
+}
+
+.inactive svg path:nth-child(1) {
+  fill: var(--bg-inactive);
+}
+
+.inactive svg path:nth-child(2) {
+  fill: var(--f-color);
 }
