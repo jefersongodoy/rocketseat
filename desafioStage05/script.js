@@ -1,6 +1,7 @@
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 const buttonPlay = document.querySelector('.play')
+const buttonPause = document.querySelector('.pause')
 const buttonStop = document.querySelector('.stop')
 const buttonSum = document.querySelector('.sum')
 const buttonSub = document.querySelector('.sub')
@@ -79,36 +80,54 @@ function countDown() {
     }
 
     if (seconds <= 0) {
-      seconds = 60
+      seconds = 2
       --minutes
     }
 
     updateDisplay(minutes, String(seconds - 1))
+    console.log(minutes)
 
     countDown()
   }, 1000)
 }
 
+function hideShow() {
+  buttonPlay.classList.add('hide')
+  buttonPause.classList.remove('hide')
+}
+
+function showHide() {
+  buttonPlay.classList.remove('hide')
+  buttonPause.classList.add('hide')
+}
+
 buttonPlay.addEventListener('click', function () {
   press()
   countDown()
+  hideShow()
+})
+
+buttonPause.addEventListener('click', function () {
+  showHide()
+  clearTimeout(timerOut)
 })
 
 buttonStop.addEventListener('click', function () {
   press()
   clearTimeout(timerOut)
   updateDisplay(minutes, 0)
+  showHide()
 })
 
 buttonSum.addEventListener('click', function () {
   press()
-  ++minutes
+  minutes = minutes + 5
   updateDisplay(minutes, 0)
 })
 
 buttonSub.addEventListener('click', function () {
   press()
-  --minutes
+  minutes = minutes - 5
   updateDisplay(minutes, 0)
 })
 

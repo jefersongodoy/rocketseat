@@ -52,6 +52,10 @@ body {
   height: 4.8rem;
 }
 
+.hide {
+  display: none;
+}
+
 .cards {
   width: 30.8rem;
   height: 33.6rem;
