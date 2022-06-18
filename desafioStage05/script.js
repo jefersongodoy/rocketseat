@@ -20,7 +20,7 @@ buttonForest.addEventListener('click', function () {
   if (activate) {
     forest()
   } else {
-    stp()
+    stopSound()
   }
   buttonForest.classList.remove('inactive')
   buttonRain.classList.remove('active')
@@ -34,7 +34,7 @@ buttonForest.addEventListener('click', function () {
 buttonRain.addEventListener('click', function () {
   let activate = buttonRain.classList.toggle('inactive')
   if (activate) {
-    stp()
+    stopSound()
   } else {
     rain()
   }
@@ -52,7 +52,7 @@ buttonStore.addEventListener('click', function () {
   if (activate) {
     coffee()
   } else {
-    stp()
+    stopSound()
   }
   buttonStore.classList.remove('inactive')
   buttonForest.classList.remove('active')
@@ -68,7 +68,7 @@ buttonFire.addEventListener('click', function () {
   if (activate) {
     fire()
   } else {
-    stp()
+    stopSound()
   }
   buttonFire.classList.remove('inactive')
   buttonStore.classList.remove('active')
@@ -204,7 +204,7 @@ function fire() {
   rainSound.pause()
 }
 
-function stp() {
+function stopSound() {
   forestSound.pause()
   rainSound.pause()
   coffeeSound.pause()
