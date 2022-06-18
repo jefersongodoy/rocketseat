@@ -1,3 +1,5 @@
+// ----- VARIABLES -----
+
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 const buttonPlay = document.querySelector('.play')
@@ -11,20 +13,31 @@ const buttonStore = document.querySelector('.store')
 const buttonFire = document.querySelector('.fire')
 let minutes = Number(minutesDisplay.textContent)
 
+// ----- BUTTONS CARDS -----
+
 buttonForest.addEventListener('click', function () {
+  let activate = buttonForest.classList.toggle('active')
+  if (activate) {
+    forest()
+  } else {
+    stp()
+  }
   buttonForest.classList.remove('inactive')
-  buttonForest.classList.add('active')
   buttonRain.classList.remove('active')
   buttonRain.classList.add('inactive')
   buttonStore.classList.remove('active')
   buttonStore.classList.add('inactive')
   buttonFire.classList.remove('active')
   buttonFire.classList.add('inactive')
-  forest()
 })
 
 buttonRain.addEventListener('click', function () {
-  buttonRain.classList.remove('inactive')
+  let activate = buttonRain.classList.toggle('inactive')
+  if (activate) {
+    stp()
+  } else {
+    rain()
+  }
   buttonRain.classList.add('active')
   buttonForest.classList.remove('active')
   buttonForest.classList.add('inactive')
@@ -32,32 +45,41 @@ buttonRain.addEventListener('click', function () {
   buttonStore.classList.add('inactive')
   buttonFire.classList.remove('active')
   buttonFire.classList.add('inactive')
-  rain()
 })
 
 buttonStore.addEventListener('click', function () {
+  let activate = buttonStore.classList.toggle('active')
+  if (activate) {
+    coffee()
+  } else {
+    stp()
+  }
   buttonStore.classList.remove('inactive')
-  buttonStore.classList.add('active')
   buttonForest.classList.remove('active')
   buttonForest.classList.add('inactive')
   buttonRain.classList.remove('active')
   buttonRain.classList.add('inactive')
   buttonFire.classList.remove('active')
   buttonFire.classList.add('inactive')
-  coffee()
 })
 
 buttonFire.addEventListener('click', function () {
+  let activate = buttonFire.classList.toggle('active')
+  if (activate) {
+    fire()
+  } else {
+    stp()
+  }
   buttonFire.classList.remove('inactive')
-  buttonFire.classList.add('active')
   buttonStore.classList.remove('active')
   buttonStore.classList.add('inactive')
   buttonForest.classList.remove('active')
   buttonForest.classList.add('inactive')
   buttonRain.classList.remove('active')
   buttonRain.classList.add('inactive')
-  fire()
 })
+
+// ----- FUNCTIONS OF TIMER
 
 function updateDisplay(minutes, seconds) {
   minutesDisplay.textContent = String(minutes).padStart(2, '0')
@@ -85,7 +107,6 @@ function countDown() {
     }
 
     updateDisplay(minutes, String(seconds - 1))
-    console.log(minutes)
 
     countDown()
   }, 1000)
@@ -100,6 +121,8 @@ function showHide() {
   buttonPlay.classList.remove('hide')
   buttonPause.classList.add('hide')
 }
+
+// ----- BUTTONS CONTROLS OF TIMER -----
 
 buttonPlay.addEventListener('click', function () {
   press()
@@ -121,7 +144,7 @@ buttonStop.addEventListener('click', function () {
 
 buttonSum.addEventListener('click', function () {
   press()
-  minutes = minutes + 5
+  minutes = Number(minutesDisplay.textContent) + 5
   updateDisplay(minutes, 0)
 })
 
@@ -130,6 +153,8 @@ buttonSub.addEventListener('click', function () {
   minutes = minutes - 5
   updateDisplay(minutes, 0)
 })
+
+// ----- FUNCTIONS OF SOUND -----
 
 forestSound = new Audio('./sounds/Floresta.wav')
 coffeeSound = new Audio('./sounds/Cafeteria.wav')
@@ -177,4 +202,11 @@ function fire() {
   coffeeSound.pause()
   forestSound.pause()
   rainSound.pause()
+}
+
+function stp() {
+  forestSound.pause()
+  rainSound.pause()
+  coffeeSound.pause()
+  fireSound.pause()
 }
