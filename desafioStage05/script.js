@@ -32,13 +32,13 @@ buttonForest.addEventListener('click', function () {
 })
 
 buttonRain.addEventListener('click', function () {
-  let activate = buttonRain.classList.toggle('inactive')
+  let activate = buttonRain.classList.toggle('active')
   if (activate) {
-    stopSound()
-  } else {
     rain()
+  } else {
+    stopSound()
   }
-  buttonRain.classList.add('active')
+  buttonRain.classList.remove('inactive')
   buttonForest.classList.remove('active')
   buttonForest.classList.add('inactive')
   buttonStore.classList.remove('active')
@@ -102,7 +102,7 @@ function countDown() {
     }
 
     if (seconds <= 0) {
-      seconds = 2
+      seconds = 60
       --minutes
     }
 
