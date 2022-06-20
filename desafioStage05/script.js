@@ -22,13 +22,9 @@ buttonForest.addEventListener('click', function () {
   } else {
     stopSound()
   }
-  buttonForest.classList.remove('inactive')
   buttonRain.classList.remove('active')
-  buttonRain.classList.add('inactive')
   buttonStore.classList.remove('active')
-  buttonStore.classList.add('inactive')
   buttonFire.classList.remove('active')
-  buttonFire.classList.add('inactive')
 })
 
 buttonRain.addEventListener('click', function () {
@@ -38,13 +34,9 @@ buttonRain.addEventListener('click', function () {
   } else {
     stopSound()
   }
-  buttonRain.classList.remove('inactive')
   buttonForest.classList.remove('active')
-  buttonForest.classList.add('inactive')
   buttonStore.classList.remove('active')
-  buttonStore.classList.add('inactive')
   buttonFire.classList.remove('active')
-  buttonFire.classList.add('inactive')
 })
 
 buttonStore.addEventListener('click', function () {
@@ -54,13 +46,9 @@ buttonStore.addEventListener('click', function () {
   } else {
     stopSound()
   }
-  buttonStore.classList.remove('inactive')
   buttonForest.classList.remove('active')
-  buttonForest.classList.add('inactive')
   buttonRain.classList.remove('active')
-  buttonRain.classList.add('inactive')
   buttonFire.classList.remove('active')
-  buttonFire.classList.add('inactive')
 })
 
 buttonFire.addEventListener('click', function () {
@@ -70,13 +58,9 @@ buttonFire.addEventListener('click', function () {
   } else {
     stopSound()
   }
-  buttonFire.classList.remove('inactive')
   buttonStore.classList.remove('active')
-  buttonStore.classList.add('inactive')
   buttonForest.classList.remove('active')
-  buttonForest.classList.add('inactive')
   buttonRain.classList.remove('active')
-  buttonRain.classList.add('inactive')
 })
 
 // ----- FUNCTIONS OF TIMER
@@ -98,11 +82,12 @@ function countDown() {
     if (minutes <= 0 && seconds <= 0) {
       finish()
       timerEnd()
+      showHide()
       return
     }
 
     if (seconds <= 0) {
-      seconds = 60
+      seconds = 2
       --minutes
     }
 
@@ -128,11 +113,14 @@ buttonPlay.addEventListener('click', function () {
   press()
   countDown()
   hideShow()
+  buttonSum.setAttribute('disabled', 'disabled')
+  buttonSub.setAttribute('disabled', 'disabled')
 })
 
 buttonPause.addEventListener('click', function () {
   showHide()
   clearTimeout(timerOut)
+  enableControls()
 })
 
 buttonStop.addEventListener('click', function () {
@@ -140,19 +128,29 @@ buttonStop.addEventListener('click', function () {
   clearTimeout(timerOut)
   updateDisplay(minutes, 0)
   showHide()
+  enableControls()
 })
 
 buttonSum.addEventListener('click', function () {
   press()
-  minutes = Number(minutesDisplay.textContent) + 5
+  if (minutes < 90) {
+    minutes = Number(minutesDisplay.textContent) + 5
+  }
   updateDisplay(minutes, 0)
 })
 
 buttonSub.addEventListener('click', function () {
   press()
-  minutes = minutes - 5
+  if (minutes > 0) {
+    minutes = Number(minutesDisplay.textContent) - 5
+  }
   updateDisplay(minutes, 0)
 })
+
+function enableControls() {
+  buttonSum.removeAttribute('disabled', 'disabled')
+  buttonSub.removeAttribute('disabled', 'disabled')
+}
 
 // ----- FUNCTIONS OF SOUND -----
 
