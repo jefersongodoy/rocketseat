@@ -87,7 +87,7 @@ function countDown() {
     }
 
     if (seconds <= 0) {
-      seconds = 2
+      seconds = 60
       --minutes
     }
 
@@ -135,6 +135,9 @@ buttonSum.addEventListener('click', function () {
   press()
   if (minutes < 90) {
     minutes = Number(minutesDisplay.textContent) + 5
+  } else if (minutes > 90) {
+    minutes = 90
+    buttonSum.setAttribute('disabled', 'disabled')
   }
   updateDisplay(minutes, 0)
 })
@@ -143,6 +146,9 @@ buttonSub.addEventListener('click', function () {
   press()
   if (minutes > 0) {
     minutes = Number(minutesDisplay.textContent) - 5
+  } else if (minutes < 0) {
+    minutes = 0
+    buttonSub.setAttribute('disabled', 'disabled')
   }
   updateDisplay(minutes, 0)
 })
