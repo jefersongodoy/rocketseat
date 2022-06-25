@@ -12,55 +12,52 @@ const buttonRain = document.querySelector('.rain')
 const buttonStore = document.querySelector('.store')
 const buttonFire = document.querySelector('.fire')
 let minutes = Number(minutesDisplay.textContent)
+const iconSun = document.querySelector('.iconDay')
+const iconMoon = document.querySelector('.iconNight')
+const bodyAll = document.querySelector('.bodyAll')
+const buttonSoundOn = document.querySelector('.iconSoundOn')
+const buttonSoundOff = document.querySelector('.iconSoundOff')
 
 // ----- BUTTONS CARDS -----
 
 buttonForest.addEventListener('click', function () {
-  let activate = buttonForest.classList.toggle('active')
-  if (activate) {
-    forest()
-  } else {
-    stopSound()
-  }
+  buttonForest.classList.add('active')
   buttonRain.classList.remove('active')
   buttonStore.classList.remove('active')
   buttonFire.classList.remove('active')
+  buttonSoundOff.classList.add('hide')
+  buttonSoundOn.classList.remove('hide')
+  forest()
 })
 
 buttonRain.addEventListener('click', function () {
-  let activate = buttonRain.classList.toggle('active')
-  if (activate) {
-    rain()
-  } else {
-    stopSound()
-  }
+  buttonRain.classList.add('active')
   buttonForest.classList.remove('active')
   buttonStore.classList.remove('active')
   buttonFire.classList.remove('active')
+  buttonSoundOff.classList.add('hide')
+  buttonSoundOn.classList.remove('hide')
+  rain()
 })
 
 buttonStore.addEventListener('click', function () {
-  let activate = buttonStore.classList.toggle('active')
-  if (activate) {
-    coffee()
-  } else {
-    stopSound()
-  }
+  buttonStore.classList.add('active')
   buttonForest.classList.remove('active')
   buttonRain.classList.remove('active')
   buttonFire.classList.remove('active')
+  buttonSoundOff.classList.add('hide')
+  buttonSoundOn.classList.remove('hide')
+  coffee()
 })
 
 buttonFire.addEventListener('click', function () {
-  let activate = buttonFire.classList.toggle('active')
-  if (activate) {
-    fire()
-  } else {
-    stopSound()
-  }
+  buttonFire.classList.add('active')
   buttonStore.classList.remove('active')
   buttonForest.classList.remove('active')
   buttonRain.classList.remove('active')
+  buttonSoundOff.classList.add('hide')
+  buttonSoundOn.classList.remove('hide')
+  fire()
 })
 
 // ----- FUNCTIONS OF TIMER
@@ -172,6 +169,20 @@ coffeeSound.loop = true
 rainSound.loop = true
 fireSound.loop = true
 
+buttonSoundOn.addEventListener('click', function () {
+  buttonSoundOff.classList.remove('hide')
+  buttonSoundOn.classList.add('hide')
+  buttonForest.classList.remove('active')
+  buttonForest.classList.remove('activeDark')
+  buttonRain.classList.remove('active')
+  buttonRain.classList.remove('activeDark')
+  buttonStore.classList.remove('active')
+  buttonStore.classList.remove('activeDark')
+  buttonFire.classList.remove('active')
+  buttonFire.classList.remove('activeDark')
+  stopSound()
+})
+
 function press() {
   buttonPress.play()
 }
@@ -214,3 +225,39 @@ function stopSound() {
   coffeeSound.pause()
   fireSound.pause()
 }
+
+// ----- FUNCTIONS OF DARKMODE -----
+
+iconSun.addEventListener('click', function () {
+  bodyAll.classList.add('darkMode')
+  iconMoon.classList.remove('hide')
+  iconSun.classList.add('hide')
+  buttonForest.classList.add('cardDark')
+  buttonRain.classList.add('cardDark')
+  buttonStore.classList.add('cardDark')
+  buttonFire.classList.add('cardDark')
+  buttonPlay.classList.add('buttonDakr')
+  buttonPause.classList.add('buttonDakr')
+  buttonStop.classList.add('buttonDakr')
+  buttonSum.classList.add('buttonDakr')
+  buttonSub.classList.add('buttonDakr')
+  buttonSoundOn.classList.add('buttonDakr')
+  buttonSoundOff.classList.add('buttonDakr')
+})
+
+iconMoon.addEventListener('click', function () {
+  bodyAll.classList.remove('darkMode')
+  iconMoon.classList.add('hide')
+  iconSun.classList.remove('hide')
+  buttonForest.classList.remove('cardDark')
+  buttonRain.classList.remove('cardDark')
+  buttonStore.classList.remove('cardDark')
+  buttonFire.classList.remove('cardDark')
+  buttonPlay.classList.remove('buttonDakr')
+  buttonPause.classList.remove('buttonDakr')
+  buttonStop.classList.remove('buttonDakr')
+  buttonSum.classList.remove('buttonDakr')
+  buttonSub.classList.remove('buttonDakr')
+  buttonSoundOn.classList.remove('buttonDakr')
+  buttonSoundOff.classList.remove('buttonDakr')
+})

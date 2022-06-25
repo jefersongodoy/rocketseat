@@ -5,13 +5,20 @@
 }
 
 :root {
-  --bg-color: hsl(0, 0%, 100%);
-  --bg-active: hsl(194, 97%, 31%);
-  --bg-inactive: hsl(240, 9%, 89%);
-  --f-color: hsl(240, 6%, 21%);
+  /* ===== FONTS ===== */
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 62.5%;
+
+  /* ===== LIGHT MODE ===== */
+  --bg-color: hsl(0, 0%, 100%);
+  --f-color: hsl(240, 6%, 21%);
+  --bg-active: hsl(194, 97%, 31%);
+
+  /* ===== DARK MODE ===== */
+  --bg-colorDMode: hsl(240, 6%, 17%);
+  --bg-activeDMode: hsla(195, 74%, 15%);
+  --f-colorDMode: hsl(0, 0%, 100%);
 }
 
 body {
@@ -27,6 +34,30 @@ body {
   align-items: center;
   margin: 0 auto;
   padding: 1.5rem;
+}
+
+.iconDay {
+  position: fixed;
+  top: 6rem;
+  right: 6rem;
+}
+
+.iconNight {
+  position: fixed;
+  top: 6rem;
+  right: 6rem;
+}
+
+.iconSoundOn {
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
+}
+
+.iconSoundOff {
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
 }
 
 .controls {
@@ -79,6 +110,71 @@ button {
   fill: var(--bg-active);
 }
 
-.active svg path:nth-child(2) {
+.active svg rect {
   fill: var(--bg-color);
+}
+
+.active svg circle {
+  fill: var(--bg-color);
+}
+
+.active svg path:nth-child(4) {
+  fill: var(--bg-color);
+}
+
+/* =====DARK MODE =====*/
+.darkMode {
+  background: #121214;
+  color: var(--f-colorDMode);
+}
+
+.cardDark svg path:nth-child(1) {
+  fill: var(--bg-colorDMode);
+}
+
+.cardDark svg rect {
+  fill: var(--f-colorDMode);
+}
+
+.cardDark svg circle {
+  fill: var(--f-colorDMode);
+}
+
+.cardDark svg path:nth-child(4) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(1) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(2) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(3) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(4) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(5) {
+  fill: var(--f-colorDMode);
+}
+
+.buttonDakr svg path:nth-child(6) {
+  fill: var(--f-colorDMode);
+}
+
+.activeDark svg path:nth-child(1) {
+  fill: var(--bg-activeDMode);
+}
+
+.activeDark svg path:nth-child(2) {
+  fill: var(--bg-activeDMode);
+}
+.activeDark svg path:nth-child(3) {
+  fill: var(--bg-activeDMode);
 }
