@@ -14,9 +14,13 @@ const buttonFire = document.querySelector('.fire')
 let minutes = Number(minutesDisplay.textContent)
 const iconSun = document.querySelector('.iconDay')
 const iconMoon = document.querySelector('.iconNight')
-const bodyAll = document.querySelector('.bodyAll')
+const body = document.querySelector('.body')
 const buttonSoundOn = document.querySelector('.iconSoundOn')
 const buttonSoundOff = document.querySelector('.iconSoundOff')
+const inputForest = document.querySelector('.forest-volume')
+const inputRain = document.querySelector('.rain-volume')
+const inputStore = document.querySelector('.store-volume')
+const inputFire = document.querySelector('.fire-volume')
 
 // ----- BUTTONS CARDS -----
 
@@ -27,7 +31,12 @@ buttonForest.addEventListener('click', function () {
   buttonFire.classList.remove('active')
   buttonSoundOff.classList.add('hide')
   buttonSoundOn.classList.remove('hide')
+  inputForest.classList.add('active')
+  inputRain.classList.remove('active')
+  inputStore.classList.remove('active')
+  inputFire.classList.remove('active')
   forest()
+  resetInput()
 })
 
 buttonRain.addEventListener('click', function () {
@@ -37,7 +46,12 @@ buttonRain.addEventListener('click', function () {
   buttonFire.classList.remove('active')
   buttonSoundOff.classList.add('hide')
   buttonSoundOn.classList.remove('hide')
+  inputRain.classList.add('active')
+  inputForest.classList.remove('active')
+  inputStore.classList.remove('active')
+  inputFire.classList.remove('active')
   rain()
+  resetInput()
 })
 
 buttonStore.addEventListener('click', function () {
@@ -47,7 +61,12 @@ buttonStore.addEventListener('click', function () {
   buttonFire.classList.remove('active')
   buttonSoundOff.classList.add('hide')
   buttonSoundOn.classList.remove('hide')
+  inputStore.classList.add('active')
+  inputRain.classList.remove('active')
+  inputForest.classList.remove('active')
+  inputFire.classList.remove('active')
   coffee()
+  resetInput()
 })
 
 buttonFire.addEventListener('click', function () {
@@ -57,8 +76,24 @@ buttonFire.addEventListener('click', function () {
   buttonRain.classList.remove('active')
   buttonSoundOff.classList.add('hide')
   buttonSoundOn.classList.remove('hide')
+  inputFire.classList.add('active')
+  inputRain.classList.remove('active')
+  inputStore.classList.remove('active')
+  inputForest.classList.remove('active')
   fire()
+  resetInput()
 })
+
+function resetInput() {
+  forestSound.volume = 0.5
+  inputForest.value = 0.5
+  rainSound.volume = 0.5
+  inputRain.value = 0.5
+  storeSound.volume = 0.5
+  inputStore.value = 0.5
+  fireSound.volume = 0.5
+  inputFire.value = 0.5
+}
 
 // ----- FUNCTIONS OF TIMER
 
@@ -158,14 +193,14 @@ function enableControls() {
 // ----- FUNCTIONS OF SOUND -----
 
 forestSound = new Audio('./sounds/Floresta.wav')
-coffeeSound = new Audio('./sounds/Cafeteria.wav')
+storeSound = new Audio('./sounds/Cafeteria.wav')
 rainSound = new Audio('./sounds/Chuva.wav')
 fireSound = new Audio('./sounds/Lareira.wav')
 buttonPress = new Audio('./sounds/button-press.wav')
 kichenTimer = new Audio('./sounds/kichen-timer.mp3')
 
 forestSound.loop = true
-coffeeSound.loop = true
+storeSound.loop = true
 rainSound.loop = true
 fireSound.loop = true
 
@@ -180,6 +215,10 @@ buttonSoundOn.addEventListener('click', function () {
   buttonStore.classList.remove('activeDark')
   buttonFire.classList.remove('active')
   buttonFire.classList.remove('activeDark')
+  inputForest.classList.remove('active')
+  inputRain.classList.remove('active')
+  inputStore.classList.remove('active')
+  inputFire.classList.remove('active')
   stopSound()
 })
 
@@ -193,20 +232,20 @@ function finish() {
 
 function forest() {
   forestSound.play()
-  coffeeSound.pause()
+  storeSound.pause()
   rainSound.pause()
   fireSound.pause()
 }
 
 function rain() {
   rainSound.play()
-  coffeeSound.pause()
+  storeSound.pause()
   forestSound.pause()
   fireSound.pause()
 }
 
 function coffee() {
-  coffeeSound.play()
+  storeSound.play()
   forestSound.pause()
   rainSound.pause()
   fireSound.pause()
@@ -214,7 +253,7 @@ function coffee() {
 
 function fire() {
   fireSound.play()
-  coffeeSound.pause()
+  storeSound.pause()
   forestSound.pause()
   rainSound.pause()
 }
@@ -222,42 +261,46 @@ function fire() {
 function stopSound() {
   forestSound.pause()
   rainSound.pause()
-  coffeeSound.pause()
+  storeSound.pause()
   fireSound.pause()
 }
+
+inputForest.addEventListener('change', function () {
+  forestSound.volume = this.value
+})
+
+inputRain.addEventListener('change', function () {
+  rainSound.volume = this.value
+})
+
+inputStore.addEventListener('change', function () {
+  storeSound.volume = this.value
+})
+
+inputFire.addEventListener('change', function () {
+  fireSound.volume = this.value
+})
+
+function inputReset() {}
 
 // ----- FUNCTIONS OF DARKMODE -----
 
 iconSun.addEventListener('click', function () {
-  bodyAll.classList.add('darkMode')
+  body.classList.add('darkMode')
   iconMoon.classList.remove('hide')
   iconSun.classList.add('hide')
-  buttonForest.classList.add('cardDark')
-  buttonRain.classList.add('cardDark')
-  buttonStore.classList.add('cardDark')
-  buttonFire.classList.add('cardDark')
-  buttonPlay.classList.add('buttonDakr')
-  buttonPause.classList.add('buttonDakr')
-  buttonStop.classList.add('buttonDakr')
-  buttonSum.classList.add('buttonDakr')
-  buttonSub.classList.add('buttonDakr')
-  buttonSoundOn.classList.add('buttonDakr')
-  buttonSoundOff.classList.add('buttonDakr')
+  inputForest.classList.add('inputsDark')
+  inputRain.classList.add('inputsDark')
+  inputStore.classList.add('inputsDark')
+  inputFire.classList.add('inputsDark')
 })
 
 iconMoon.addEventListener('click', function () {
-  bodyAll.classList.remove('darkMode')
+  body.classList.remove('darkMode')
   iconMoon.classList.add('hide')
   iconSun.classList.remove('hide')
-  buttonForest.classList.remove('cardDark')
-  buttonRain.classList.remove('cardDark')
-  buttonStore.classList.remove('cardDark')
-  buttonFire.classList.remove('cardDark')
-  buttonPlay.classList.remove('buttonDakr')
-  buttonPause.classList.remove('buttonDakr')
-  buttonStop.classList.remove('buttonDakr')
-  buttonSum.classList.remove('buttonDakr')
-  buttonSub.classList.remove('buttonDakr')
-  buttonSoundOn.classList.remove('buttonDakr')
-  buttonSoundOff.classList.remove('buttonDakr')
+  inputForest.classList.remove('inputsDark')
+  inputRain.classList.remove('inputsDark')
+  inputStore.classList.remove('inputsDark')
+  inputFire.classList.remove('inputsDark')
 })

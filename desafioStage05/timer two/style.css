@@ -11,49 +11,46 @@
   font-size: 62.5%;
 
   /* ===== LIGHT MODE ===== */
-  --bg-color: hsl(0, 0%, 100%);
-  --f-color: hsl(240, 6%, 21%);
-  --bg-active: hsl(194, 97%, 31%);
+  --bg-color-white: hsl(0, 0%, 100%);
+  --bg-active-blue: hsl(194, 97%, 31%);
+  --bg-card: hsl(240, 50%, 89%);
+  --f-color-black: hsl(240, 6%, 21%);
+  --f-color-white: hsl(0, 0%, 100%);
+
+  --bg-input-black: hsl(240, 6%, 21%);
+  --bg-input-white: hsl(0, 0%, 100%);
 
   /* ===== DARK MODE ===== */
-  --bg-colorDMode: hsl(240, 6%, 17%);
-  --bg-activeDMode: hsla(195, 74%, 15%);
-  --f-colorDMode: hsl(0, 0%, 100%);
+  --bodyDarkMode: hsl(240, 5%, 7%);
+  --bg-colorDarkMode: hsl(240, 6%, 17%);
+  --bg-activeDarkMode: hsla(195, 74%, 15%);
+  --f-colorDarkMode: hsl(0, 0%, 100%);
 }
 
 body {
-  background: var(--bg-color);
-  color: var(--f-color);
+  background: var(--bg-color-white);
+  color: var(--f-color-black);
 }
 
 .page {
   max-width: 82.1rem;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   padding: 1.5rem;
 }
 
-.iconDay {
-  position: fixed;
-  top: 6rem;
-  right: 6rem;
-}
-
+.iconDay,
 .iconNight {
   position: fixed;
   top: 6rem;
   right: 6rem;
 }
 
-.iconSoundOn {
-  position: fixed;
-  bottom: 6rem;
-  right: 6rem;
-}
-
+.iconSoundOn,
 .iconSoundOff {
   position: fixed;
   bottom: 6rem;
@@ -98,7 +95,7 @@ body {
 
 .cards button {
   width: 13.8rem;
-  height: 15.2rem;
+  height: 11rem;
 }
 
 button {
@@ -106,75 +103,73 @@ button {
   border: none;
 }
 
+.card {
+  background: var(--bg-color-white);
+  border-radius: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card svg path:nth-child(1) {
+  fill: var(--bg-card);
+}
+
+svg path:nth-child(2) {
+  fill: var(--f-color-black);
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 9rem;
+  height: 0.6rem;
+  border-radius: 0.5rem;
+  background: var(--bg-input-black);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: var(--bg-input-black);
+}
+
 .active svg path:nth-child(1) {
-  fill: var(--bg-active);
+  fill: var(--bg-active-blue);
 }
 
-.active svg rect {
-  fill: var(--bg-color);
+.active svg path:nth-child(2) {
+  fill: var(--f-color-white);
 }
 
-.active svg circle {
-  fill: var(--bg-color);
+.active {
+  --bg-input-black: var(--bg-input-white);
 }
 
-.active svg path:nth-child(4) {
-  fill: var(--bg-color);
+.inputsDark {
+  --bg-input-black: var(--bg-input-white);
+}
+
+.buttons svg path {
+  fill: var(--f-color-black);
+}
+
+.sounds svg path {
+  fill: var(--f-color-black);
 }
 
 /* =====DARK MODE =====*/
+
 .darkMode {
-  background: #121214;
-  color: var(--f-colorDMode);
+  --bg-color-white: var(--bodyDarkMode);
+  --f-color-black: var(--f-colorDarkMode);
+  --bg-active-blue: var(--bg-activeDarkMode);
+  --bg-card: var(--bg-colorDarkMode);
 }
 
-.cardDark svg path:nth-child(1) {
-  fill: var(--bg-colorDMode);
-}
-
-.cardDark svg rect {
-  fill: var(--f-colorDMode);
-}
-
-.cardDark svg circle {
-  fill: var(--f-colorDMode);
-}
-
-.cardDark svg path:nth-child(4) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(1) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(2) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(3) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(4) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(5) {
-  fill: var(--f-colorDMode);
-}
-
-.buttonDakr svg path:nth-child(6) {
-  fill: var(--f-colorDMode);
-}
-
-.activeDark svg path:nth-child(1) {
-  fill: var(--bg-activeDMode);
-}
-
-.activeDark svg path:nth-child(2) {
-  fill: var(--bg-activeDMode);
-}
-.activeDark svg path:nth-child(3) {
-  fill: var(--bg-activeDMode);
+@media (min-width: 900px) {
+  .page {
+    flex-direction: row;
+  }
 }

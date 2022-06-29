@@ -17,7 +17,6 @@
   --fs-body: 1.6rem;
   --fs-heading: clamp(4rem, 1rem + 5vw, 5.6rem);
   --fs-heading-sm: clamp(3rem, 0.5rem + 3vw, 4rem);
-
 }
 
 body {
@@ -119,7 +118,6 @@ main {
   padding: 0 1.6rem;
   font-size: var(--fs-body);
   font-weight: 400;
-
 }
 
 @keyframes topdown {
@@ -161,8 +159,9 @@ main {
 @media (min-width: 930px) {
   main {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "A B B"
-    "C C D";
+    grid-template-areas:
+      'A B B'
+      'C C D';
   }
 
   main div:nth-child(1) {
@@ -180,5 +179,4 @@ main {
   main div:nth-child(4) {
     grid-area: D;
   }
-
 }
