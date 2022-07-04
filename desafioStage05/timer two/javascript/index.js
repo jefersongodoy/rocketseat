@@ -119,7 +119,7 @@ function countDown() {
     }
 
     if (seconds <= 0) {
-      seconds = 60
+      seconds = 2
       --minutes
     }
 
