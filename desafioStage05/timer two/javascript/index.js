@@ -1,3 +1,17 @@
+import {
+  press,
+  finish,
+  forest,
+  rain,
+  coffee,
+  fire,
+  stopSound,
+  forestSound,
+  rainSound,
+  storeSound,
+  fireSound
+} from './sounds.js'
+
 // ----- VARIABLES -----
 
 const minutesDisplay = document.querySelector('.minutes')
@@ -210,61 +224,6 @@ buttonSoundOn.addEventListener('click', function () {
   stopSound()
 })
 
-const forestSound = new Audio('./sounds/Floresta.wav')
-const storeSound = new Audio('./sounds/Cafeteria.wav')
-const rainSound = new Audio('./sounds/Chuva.wav')
-const fireSound = new Audio('./sounds/Lareira.wav')
-const buttonPress = new Audio('./sounds/button-press.wav')
-const kichenTimer = new Audio('./sounds/kichen-timer.mp3')
-
-forestSound.loop = true
-storeSound.loop = true
-rainSound.loop = true
-fireSound.loop = true
-
-function press() {
-  buttonPress.play()
-}
-
-function finish() {
-  kichenTimer.play()
-}
-
-function forest() {
-  forestSound.play()
-  storeSound.pause()
-  rainSound.pause()
-  fireSound.pause()
-}
-
-function rain() {
-  rainSound.play()
-  storeSound.pause()
-  forestSound.pause()
-  fireSound.pause()
-}
-
-function coffee() {
-  storeSound.play()
-  forestSound.pause()
-  rainSound.pause()
-  fireSound.pause()
-}
-
-function fire() {
-  fireSound.play()
-  storeSound.pause()
-  forestSound.pause()
-  rainSound.pause()
-}
-
-function stopSound() {
-  forestSound.pause()
-  rainSound.pause()
-  storeSound.pause()
-  fireSound.pause()
-}
-
 inputForest.addEventListener('change', function () {
   forestSound.volume = this.value
 })
@@ -283,20 +242,20 @@ inputFire.addEventListener('change', function () {
 
 // ----- FUNCTIONS OF DARKMODE -----
 
-iconSun.addEventListener('click', function () {
+iconMoon.addEventListener('click', function () {
   body.classList.add('darkMode')
-  iconMoon.classList.remove('hide')
-  iconSun.classList.add('hide')
+  iconSun.classList.remove('hide')
+  iconMoon.classList.add('hide')
   inputForest.classList.add('inputsDark')
   inputRain.classList.add('inputsDark')
   inputStore.classList.add('inputsDark')
   inputFire.classList.add('inputsDark')
 })
 
-iconMoon.addEventListener('click', function () {
+iconSun.addEventListener('click', function () {
   body.classList.remove('darkMode')
-  iconMoon.classList.add('hide')
-  iconSun.classList.remove('hide')
+  iconSun.classList.add('hide')
+  iconMoon.classList.remove('hide')
   inputForest.classList.remove('inputsDark')
   inputRain.classList.remove('inputsDark')
   inputStore.classList.remove('inputsDark')
