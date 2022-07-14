@@ -1,6 +1,5 @@
 import {
   press,
-  finish,
   forest,
   rain,
   coffee,
@@ -12,10 +11,14 @@ import {
   fireSound
 } from './sounds.js'
 
-// ----- VARIABLES -----
+import Timer from './timer.js'
 
+import Controls from './controls.js'
+
+// ----- VARIABLES -----
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
+let minutes = Number(minutesDisplay.textContent)
 const buttonPlay = document.querySelector('.play')
 const buttonPause = document.querySelector('.pause')
 const buttonStop = document.querySelector('.stop')
@@ -25,7 +28,6 @@ const buttonForest = document.querySelector('.forest')
 const buttonRain = document.querySelector('.rain')
 const buttonStore = document.querySelector('.store')
 const buttonFire = document.querySelector('.fire')
-let minutes = Number(minutesDisplay.textContent)
 const iconSun = document.querySelector('.iconDay')
 const iconMoon = document.querySelector('.iconNight')
 const body = document.querySelector('.body')
@@ -35,6 +37,25 @@ const inputForest = document.querySelector('.forest-volume')
 const inputRain = document.querySelector('.rain-volume')
 const inputStore = document.querySelector('.store-volume')
 const inputFire = document.querySelector('.fire-volume')
+let timerOut
+
+const timer = Timer({
+  minutesDisplay,
+  secondsDisplay,
+  minutes,
+  timerOut,
+  buttonPlay,
+  buttonPause,
+  updateDisplay
+})
+
+const controls = Controls({
+  buttonSub,
+  buttonSum,
+  minutes,
+  minutesDisplay,
+  updateDisplay
+})
 
 // ----- BUTTONS CARDS -----
 
@@ -109,101 +130,6 @@ function resetInput() {
   inputFire.value = 0.5
 }
 
-// ----- FUNCTIONS OF TIMER
-
-function updateDisplay(minutes, seconds) {
-  minutesDisplay.textContent = String(minutes).padStart(2, '0')
-  secondsDisplay.textContent = String(seconds).padStart(2, '0')
-}
-
-function timerEnd() {
-  updateDisplay(minutes, 0)
-}
-
-function countDown() {
-  timerOut = setTimeout(function () {
-    let minutes = Number(minutesDisplay.textContent)
-    let seconds = Number(secondsDisplay.textContent)
-
-    if (minutes <= 0 && seconds <= 0) {
-      finish()
-      timerEnd()
-      showHide()
-      return
-    }
-
-    if (seconds <= 0) {
-      seconds = 2
-      --minutes
-    }
-
-    updateDisplay(minutes, String(seconds - 1))
-
-    countDown()
-  }, 1000)
-}
-
-function hideShow() {
-  buttonPlay.classList.add('hide')
-  buttonPause.classList.remove('hide')
-}
-
-function showHide() {
-  buttonPlay.classList.remove('hide')
-  buttonPause.classList.add('hide')
-}
-
-// ----- BUTTONS CONTROLS OF TIMER -----
-
-buttonPlay.addEventListener('click', function () {
-  press()
-  countDown()
-  hideShow()
-  buttonSum.setAttribute('disabled', 'disabled')
-  buttonSub.setAttribute('disabled', 'disabled')
-})
-
-buttonPause.addEventListener('click', function () {
-  showHide()
-  clearTimeout(timerOut)
-  enableControls()
-})
-
-buttonStop.addEventListener('click', function () {
-  press()
-  clearTimeout(timerOut)
-  updateDisplay(minutes, 0)
-  showHide()
-  enableControls()
-})
-
-buttonSum.addEventListener('click', function () {
-  press()
-  if (minutes < 90) {
-    minutes = Number(minutesDisplay.textContent) + 5
-  } else if (minutes > 90) {
-    minutes = 90
-    buttonSum.setAttribute('disabled', 'disabled')
-  }
-  updateDisplay(minutes, 0)
-})
-
-buttonSub.addEventListener('click', function () {
-  press()
-  if (minutes > 0) {
-    minutes = Number(minutesDisplay.textContent) - 5
-  } else if (minutes < 0) {
-    minutes = 0
-    buttonSub.setAttribute('disabled', 'disabled')
-  }
-  updateDisplay(minutes, 0)
-})
-
-function enableControls() {
-  buttonSum.removeAttribute('disabled', 'disabled')
-  buttonSub.removeAttribute('disabled', 'disabled')
-}
-
 // ----- SOUND -----
 
 buttonSoundOn.addEventListener('click', function () {
@@ -261,3 +187,36 @@ iconSun.addEventListener('click', function () {
   inputStore.classList.remove('inputsDark')
   inputFire.classList.remove('inputsDark')
 })
+
+buttonPlay.addEventListener('click', function () {
+  press()
+  timer.countDown()
+  timer.hideShow()
+  controls.play()
+})
+
+buttonPause.addEventListener('click', function () {
+  timer.showHide()
+  clearTimeout(timerOut)
+  enableControls()
+})
+
+buttonStop.addEventListener('click', function () {
+  press()
+  clearTimeout(timerOut)
+  updateDisplay(minutes, 0)
+  timer.showHide()
+  enableControls()
+})
+
+buttonSum.addEventListener('click', function () {
+  controls.sum()
+})
+
+buttonSub.addEventListener('click', function () {
+  controls.sub()
+})
+
+function enableControls() {
+  controls.enableControl()
+}
