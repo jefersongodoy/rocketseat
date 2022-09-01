@@ -9,7 +9,6 @@ export default function Timer({
   timerOut,
   buttonPlay,
   buttonPause,
-  updateDisplay,
   updateDisplay
 }) {
   function updateDisplay(minutes, seconds) {
