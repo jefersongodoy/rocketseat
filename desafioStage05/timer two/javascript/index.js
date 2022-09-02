@@ -8,14 +8,10 @@ import {
   forestSound,
   rainSound,
   storeSound,
-  fireSound
+  fireSound,
+  finish
 } from './sounds.js'
 
-import Timer from './timer.js'
-
-import Controls from './controls.js'
-
-// ----- VARIABLES -----
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 let minutes = Number(minutesDisplay.textContent)
@@ -24,13 +20,14 @@ const buttonPause = document.querySelector('.pause')
 const buttonStop = document.querySelector('.stop')
 const buttonSum = document.querySelector('.sum')
 const buttonSub = document.querySelector('.sub')
+
+const iconSun = document.querySelector('.iconDay')
+const iconMoon = document.querySelector('.iconNight')
+const body = document.querySelector('.body')
 const buttonForest = document.querySelector('.forest')
 const buttonRain = document.querySelector('.rain')
 const buttonStore = document.querySelector('.store')
 const buttonFire = document.querySelector('.fire')
-const iconSun = document.querySelector('.iconDay')
-const iconMoon = document.querySelector('.iconNight')
-const body = document.querySelector('.body')
 const buttonSoundOn = document.querySelector('.iconSoundOn')
 const buttonSoundOff = document.querySelector('.iconSoundOff')
 const inputForest = document.querySelector('.forest-volume')
@@ -38,26 +35,6 @@ const inputRain = document.querySelector('.rain-volume')
 const inputStore = document.querySelector('.store-volume')
 const inputFire = document.querySelector('.fire-volume')
 let timerOut
-
-const timer = Timer({
-  minutesDisplay,
-  secondsDisplay,
-  minutes,
-  timerOut,
-  buttonPlay,
-  buttonPause,
-  updateDisplay
-})
-
-const controls = Controls({
-  buttonSub,
-  buttonSum,
-  minutes,
-  minutesDisplay,
-  updateDisplay
-})
-
-// ----- BUTTONS CARDS -----
 
 buttonForest.addEventListener('click', function () {
   buttonForest.classList.add('active')
@@ -130,8 +107,6 @@ function resetInput() {
   inputFire.value = 0.5
 }
 
-// ----- SOUND -----
-
 buttonSoundOn.addEventListener('click', function () {
   buttonSoundOff.classList.remove('hide')
   buttonSoundOn.classList.add('hide')
@@ -166,8 +141,6 @@ inputFire.addEventListener('change', function () {
   fireSound.volume = this.value
 })
 
-// ----- FUNCTIONS OF DARKMODE -----
-
 iconMoon.addEventListener('click', function () {
   body.classList.add('darkMode')
   iconSun.classList.remove('hide')
@@ -190,13 +163,13 @@ iconSun.addEventListener('click', function () {
 
 buttonPlay.addEventListener('click', function () {
   press()
-  timer.countDown()
-  timer.hideShow()
-  controls.play()
+  countDown()
+  hideShow()
+  play()
 })
 
 buttonPause.addEventListener('click', function () {
-  timer.showHide()
+  showHide()
   clearTimeout(timerOut)
   enableControls()
 })
@@ -205,18 +178,92 @@ buttonStop.addEventListener('click', function () {
   press()
   clearTimeout(timerOut)
   updateDisplay(minutes, 0)
-  timer.showHide()
+  showHide()
   enableControls()
 })
 
 buttonSum.addEventListener('click', function () {
-  controls.sum()
+  sum()
 })
 
 buttonSub.addEventListener('click', function () {
-  controls.sub()
+  sub()
 })
 
 function enableControls() {
-  controls.enableControl()
+  enableControl()
+}
+
+function updateDisplay(minutes, seconds) {
+  minutesDisplay.textContent = String(minutes).padStart(2, '0')
+  secondsDisplay.textContent = String(seconds).padStart(2, '0')
+}
+
+function timerEnd() {
+  updateDisplay(minutes, 0)
+}
+
+function countDown() {
+  timerOut = setTimeout(function () {
+    let minutes = Number(minutesDisplay.textContent)
+    let seconds = Number(secondsDisplay.textContent)
+
+    if (minutes <= 0 && seconds <= 0) {
+      finish()
+      timerEnd()
+      showHide()
+      return
+    }
+
+    if (seconds <= 0) {
+      seconds = 2
+      --minutes
+    }
+
+    updateDisplay(minutes, String(seconds - 1))
+
+    countDown()
+  }, 1000)
+}
+
+function hideShow() {
+  buttonPlay.classList.add('hide')
+  buttonPause.classList.remove('hide')
+}
+
+function showHide() {
+  buttonPlay.classList.remove('hide')
+  buttonPause.classList.add('hide')
+}
+
+function play() {
+  buttonSum.setAttribute('disabled', 'disabled')
+  buttonSub.setAttribute('disabled', 'disabled')
+}
+
+function sum() {
+  press()
+  if (minutes < 90) {
+    minutes = Number(minutesDisplay.textContent) + 5
+  } else if (minutes > 90) {
+    minutes = 90
+    buttonSum.setAttribute('disabled', 'disabled')
+  }
+  updateDisplay(minutes, 0)
+}
+
+function sub() {
+  press()
+  if (minutes > 0) {
+    minutes = Number(minutesDisplay.textContent) - 5
+  } else if (minutes < 0) {
+    minutes = 5
+    buttonSub.setAttribute('disabled', 'disabled')
+  }
+  updateDisplay(minutes, 0)
+}
+
+function enableControl() {
+  buttonSum.removeAttribute('disabled', 'disabled')
+  buttonSub.removeAttribute('disabled', 'disabled')
 }
