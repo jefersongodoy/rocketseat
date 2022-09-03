@@ -12,6 +12,7 @@ import {
   finish
 } from './sounds.js'
 
+/* VARIABLES */
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 let minutes = Number(minutesDisplay.textContent)
@@ -36,6 +37,7 @@ const inputStore = document.querySelector('.store-volume')
 const inputFire = document.querySelector('.fire-volume')
 let timerOut
 
+/* EVENTS */
 buttonForest.addEventListener('click', function () {
   buttonForest.classList.add('active')
   buttonRain.classList.remove('active')
@@ -96,51 +98,6 @@ buttonFire.addEventListener('click', function () {
   resetInput()
 })
 
-function resetInput() {
-  forestSound.volume = 0.5
-  inputForest.value = 0.5
-  rainSound.volume = 0.5
-  inputRain.value = 0.5
-  storeSound.volume = 0.5
-  inputStore.value = 0.5
-  fireSound.volume = 0.5
-  inputFire.value = 0.5
-}
-
-buttonSoundOn.addEventListener('click', function () {
-  buttonSoundOff.classList.remove('hide')
-  buttonSoundOn.classList.add('hide')
-  buttonForest.classList.remove('active')
-  buttonForest.classList.remove('activeDark')
-  buttonRain.classList.remove('active')
-  buttonRain.classList.remove('activeDark')
-  buttonStore.classList.remove('active')
-  buttonStore.classList.remove('activeDark')
-  buttonFire.classList.remove('active')
-  buttonFire.classList.remove('activeDark')
-  inputForest.classList.remove('active')
-  inputRain.classList.remove('active')
-  inputStore.classList.remove('active')
-  inputFire.classList.remove('active')
-  stopSound()
-})
-
-inputForest.addEventListener('change', function () {
-  forestSound.volume = this.value
-})
-
-inputRain.addEventListener('change', function () {
-  rainSound.volume = this.value
-})
-
-inputStore.addEventListener('change', function () {
-  storeSound.volume = this.value
-})
-
-inputFire.addEventListener('change', function () {
-  fireSound.volume = this.value
-})
-
 iconMoon.addEventListener('click', function () {
   body.classList.add('darkMode')
   iconSun.classList.remove('hide')
@@ -190,6 +147,41 @@ buttonSub.addEventListener('click', function () {
   sub()
 })
 
+buttonSoundOn.addEventListener('click', function () {
+  buttonSoundOff.classList.remove('hide')
+  buttonSoundOn.classList.add('hide')
+  buttonForest.classList.remove('active')
+  buttonForest.classList.remove('activeDark')
+  buttonRain.classList.remove('active')
+  buttonRain.classList.remove('activeDark')
+  buttonStore.classList.remove('active')
+  buttonStore.classList.remove('activeDark')
+  buttonFire.classList.remove('active')
+  buttonFire.classList.remove('activeDark')
+  inputForest.classList.remove('active')
+  inputRain.classList.remove('active')
+  inputStore.classList.remove('active')
+  inputFire.classList.remove('active')
+  stopSound()
+})
+
+inputForest.addEventListener('change', function () {
+  forestSound.volume = this.value
+})
+
+inputRain.addEventListener('change', function () {
+  rainSound.volume = this.value
+})
+
+inputStore.addEventListener('change', function () {
+  storeSound.volume = this.value
+})
+
+inputFire.addEventListener('change', function () {
+  fireSound.volume = this.value
+})
+
+/* CONTROLS */
 function enableControls() {
   enableControl()
 }
@@ -216,7 +208,7 @@ function countDown() {
     }
 
     if (seconds <= 0) {
-      seconds = 2
+      seconds = 60
       --minutes
     }
 
@@ -224,21 +216,6 @@ function countDown() {
 
     countDown()
   }, 1000)
-}
-
-function hideShow() {
-  buttonPlay.classList.add('hide')
-  buttonPause.classList.remove('hide')
-}
-
-function showHide() {
-  buttonPlay.classList.remove('hide')
-  buttonPause.classList.add('hide')
-}
-
-function play() {
-  buttonSum.setAttribute('disabled', 'disabled')
-  buttonSub.setAttribute('disabled', 'disabled')
 }
 
 function sum() {
@@ -266,4 +243,30 @@ function sub() {
 function enableControl() {
   buttonSum.removeAttribute('disabled', 'disabled')
   buttonSub.removeAttribute('disabled', 'disabled')
+}
+
+function hideShow() {
+  buttonPlay.classList.add('hide')
+  buttonPause.classList.remove('hide')
+}
+
+function showHide() {
+  buttonPlay.classList.remove('hide')
+  buttonPause.classList.add('hide')
+}
+
+function play() {
+  buttonSum.setAttribute('disabled', 'disabled')
+  buttonSub.setAttribute('disabled', 'disabled')
+}
+
+function resetInput() {
+  forestSound.volume = 0.5
+  inputForest.value = 0.5
+  rainSound.volume = 0.5
+  inputRain.value = 0.5
+  storeSound.volume = 0.5
+  inputStore.value = 0.5
+  fireSound.volume = 0.5
+  inputFire.value = 0.5
 }
